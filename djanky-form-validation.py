@@ -1,16 +1,19 @@
+# djanky-form-validation
+# Sometimes, you just wanna skip the middle man. Djanky's got you covered.
+
+
 from collections import defaultdict
-from pprint import pprint
 
 #example data
 POST = {
     'owners.0.first_name': 'David',
-    'owners.0.last_name': 'asdf',
-    'owners.0.mi': 'D',
-    'owners.1.first_name': 'Adam',
-    'owners.1.last_name': 'Solesby',
-    'owners.1.mi': 'G',
-    'baz': 'a',
-    'bang': 'a',
+    'owners.0.last_name': 'Boling',
+    'owners.0.mi': '',
+    'owners.1.first_name': 'Captain',
+    'owners.1.last_name': 'America',
+    'owners.1.mi': 'The Cap\'n',
+    'baz': 'bang',
+    'bang': 'boom',
     'foo': 'bar',
 }
 
@@ -114,4 +117,4 @@ def is_valid(cleaned):
 
 
 cleaned = clean_post(POST, REQUIRED, PATTERNS)
-pprint(is_valid(cleaned))
+# is_valid(cleaned) = True
