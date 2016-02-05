@@ -1,25 +1,26 @@
-# djanky-form-validation
-# Sometimes, you just wanna skip the middle man. Djanky's got you covered.
-
-
 from collections import defaultdict
+import re
+from pprint import pprint
 
-#example data
+EMAIL_REGEX = re.compile(r'[^@]+@[^@]+\.[^@]+')
+
 POST = {
-    'owners.0.first_name': 'David',
-    'owners.0.last_name': 'Boling',
-    'owners.0.mi': '',
-    'owners.1.first_name': 'Captain',
-    'owners.1.last_name': 'America',
-    'owners.1.mi': 'The Cap\'n',
+    'users.0.first_name': 'David',
+    'users.0.last_name': 'Boling',
+    'users.0.mi': 'daviddboling@gmail.com',
+    'users.0.email': 'capn@gmail.com',
+    'users.1.first_name': 'Captain',
+    'users.1.last_name': 'America',
+    'users.1.mi': 'The Cap\'n',
+    'users.1.email': 'capn@gmail',
     'baz': 'bang',
     'bang': 'boom',
     'foo': 'bar',
+    'email': 'bob@gmail.com'
 }
 
-REQUIRED = ['baz', 'bang', 'owners.last_name']
-PATTERNS = {}
-
+REQUIRED = ['baz', 'bang', 'users.last_name']
+PATTERNS = {"email": EMAIL_REGEX, "users.email": EMAIL_REGEX}
 
 def clean_post(posted, required, patterns={}):
     cleaned = { k: v.strip() for k, v in posted.items() if not None }
@@ -78,25 +79,24 @@ def format_nested_field_errors(prefix, fields, required, patterns):
 
         # check invalid fields
         elif validator in patterns:
-            re = patterns[validator]
-            if re.match(val):
+            if not patterns[validator].match(val):
                 validated_data['invalid'].append(key)
     return validated_data
 
 
 def format_field_errors(key, value, required, patterns):
     validated_data = {"data": value, "required": [], "invalid": []}
-    if key in required:
 
-        # check missing
+    # check missing
+    if key in required:
         if not value:
             validated_data['required'].append(key)
 
-        # check invalid
-        elif key in patterns:
-            re = patterns[key]
-            if re.match(value):
-                validated_data['invalid'].append(key)
+    # check invalid
+    elif key in patterns:
+        if not patterns[key].match(value):
+            validated_data['invalid'].append(key)
+
     return validated_data
 
 
@@ -117,4 +117,5 @@ def is_valid(cleaned):
 
 
 cleaned = clean_post(POST, REQUIRED, PATTERNS)
-# is_valid(cleaned) = True
+pprint(cleaned)
+pprint(is_valid(cleaned))
