@@ -1,6 +1,5 @@
 from collections import defaultdict
 import re
-from pprint import pprint
 
 EMAIL_REGEX = re.compile(r'[^@]+@[^@]+\.[^@]+')
 
@@ -12,7 +11,7 @@ POST = {
     'users.1.first_name': 'Captain',
     'users.1.last_name': 'America',
     'users.1.mi': 'The Cap\'n',
-    'users.1.email': 'capn@gmail',
+    'users.1.email': 'capn@gmail.com',
     'baz': 'bang',
     'bang': 'boom',
     'foo': 'bar',
@@ -117,5 +116,3 @@ def is_valid(cleaned):
 
 
 cleaned = clean_post(POST, REQUIRED, PATTERNS)
-pprint(cleaned)
-pprint(is_valid(cleaned))

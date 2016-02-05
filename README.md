@@ -37,6 +37,30 @@
     # save all the things
 ```
 
+
+#### Output
+```
+# print(cleaned)
+{
+  'bang': {'data': 'boom', 'invalid': [], 'required': []},
+  'baz': {'data': 'bang', 'invalid': [], 'required': []},
+  'email': {'data': 'bob@gmail.com', 'invalid': [], 'required': []},
+  'foo': {'data': 'bar', 'invalid': [], 'required': []},
+  'users': [
+    {'data': {'email': 'capn@gmail.com', 'first_name': 'David', 'last_name': 'Boling', 'mi': 'daviddboling@gmail.com'}, 'invalid': [], 'required': []},
+    {'data': {'email': 'capn@gmail.com', 'first_name': 'Captain', 'last_name': 'America', 'mi': "The Cap'n"}, 'invalid': [], 'required': []}
+  ],
+  'users.0.email': {'data': 'capn@gmail.com', 'invalid': [], 'required': []},
+  'users.0.first_name': {'data': 'David', 'invalid': [], 'required': []},
+  'users.0.last_name': {'data': 'Boling', 'invalid': [], 'required': []},
+  'users.0.mi': {'data': 'daviddboling@gmail.com', 'invalid': [], 'required': []},
+  'users.1.email': {'data': 'capn@gmail.com', 'invalid': [], 'required': []},
+  'users.1.first_name': {'data': 'Captain', 'invalid': [], 'required': []},
+  'users.1.last_name': {'data': 'America', 'invalid': [], 'required': []},
+  'users.1.mi': {'data': "The Cap'n", 'invalid': [], 'required': []}
+}
+```
+
 #### Example HTML (WIP)
 ```
 ```
@@ -47,4 +71,4 @@ People who want full control over layouts and a better way to handle dynamic for
 
 #### Why not Django forms?
 To be honest, you should probably just use them. As a front-end developer, I desire full control over my markup in the classical ways rather than manually
-modifying Django form layouts. Also just wanted to do it. It isn't called 'djanky-form-validation' for nothing! :)
+modifying Django form layouts. Also just wanted to do it. It isn't called 'djanky-form-validation' for nothing!
